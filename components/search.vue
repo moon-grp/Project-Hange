@@ -2,43 +2,40 @@
 <v-app>
 <div class="search-cnt">
     <div class="inner-cnt">
+        
    <h1>Weather Forcast</h1>
    <h3>Enter the city name you want us to forecast</h3>
-       <form   @submit.prevent='onsubmit'>  
-              </form>
+    <a-row type="flex" align="middle" justify="center">
               <v-form
                v-model="valid" 
                ref="form"
                @submit.prevent='onsubmit'>
-
+ <a-col :span="12">
           <v-text-field
                 class="input-cnt"
                 label="Enter City..."
                 single-line
                 outline
+                shape
                 v-model="text"
                 style="height: 50px"
                 required
-                :rules="nameRules"
+                :rules="nameRules"   
           ></v-text-field>
-
-        <v-btn  
+ </a-col>
+  <a-col :span="12">
+        <v-btn 
+            depressed 
+            normal
             :disabled="!valid" 
             class="btn-cnt" 
-            style="height: 50px"  
+            style="height: 45px"  
             color="primary"
             @click="onsubmit"
             >Submit</v-btn>
+  </a-col>
               </v-form>
-     
-     
-     
-      <a-button class="btn-cnt" type="primary" style="height: 50px" value="submit" @click="onsubmit" >Submit</a-button> 
-   <a-input
-          size="large" v-model="text" 
-           style="height: 50px"
-            placeholder="Enter City..."/>
-        
+        </a-row>
     </div>
     
 </div>
@@ -99,7 +96,7 @@ align-content: center;
     margin-top: 200px;
     margin-right:100px
 }
-
+/*
 .form-cnt{
     display: flex;
     flex-direction: row;
@@ -108,13 +105,14 @@ align-content: center;
 
 
 
-.btn-cnt{
+/*.btn-cnt{
     margin-left: 10px;
 }
 
 .input-cnt{
     margin-right: 10px;
 }
+*/
 
 </style>
 
