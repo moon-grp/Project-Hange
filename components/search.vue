@@ -1,26 +1,48 @@
 <template>
+<v-app>
 <div class="search-cnt">
     <div class="inner-cnt">
    <h1>Weather Forcast</h1>
    <h3>Enter the city name you want us to forecast</h3>
-       <form :form="form" class="form-cnt"  @submit.prevent='onsubmit'>
-             <a-form-item>
-         <a-input
-         v-decorator="[
-         'text',
-         {rules:[{required:true, message:'Please input a city!'}]}
-         ]"
+       <form   @submit.prevent='onsubmit'>  
+              </form>
+              <v-form
+               v-model="valid" 
+               ref="form"
+               @submit.prevent='onsubmit'>
+
+          <v-text-field
+                class="input-cnt"
+                label="Enter City..."
+                single-line
+                outline
+                v-model="text"
+                style="height: 50px"
+                required
+                :rules="nameRules"
+          ></v-text-field>
+
+        <v-btn  
+            :disabled="!valid" 
+            class="btn-cnt" 
+            style="height: 50px"  
+            color="primary"
+            @click="onsubmit"
+            >Submit</v-btn>
+              </v-form>
+     
+     
+     
+      <a-button class="btn-cnt" type="primary" style="height: 50px" value="submit" @click="onsubmit" >Submit</a-button> 
+   <a-input
           size="large" v-model="text" 
            style="height: 50px"
             placeholder="Enter City..."/>
-            </a-form-item>
-          <a-button class="btn-cnt" type="primary" style="height: 50px" value="submit" @click="onsubmit" >Submit</a-button> 
-            
-    </form>
-     
+        
     </div>
-</div>
     
+</div>
+    </v-app>
 </template>
 
 <script>
@@ -35,24 +57,25 @@ export default {
     components:{
         
     },
-     beforeCreate () {
-    this.form = this.$form.createForm(this);
-  },
     data(){
         return{
-            text:''
+            valid: true,
+            text:'',
+            nameRules: [
+        v => !!v || 'Name is required',
+      ],
         }
     },
     methods:{
         onsubmit(){
-             this.form.validateFields((err, values) => {
-        if (!err) {
-          console.log('Received values of form: ', values);
-          const para=this.text;
+      if (this.$refs.form.validate()) {
+           const para=this.text;
             this.$emit('search-weather', para);
+            this.$refs.form.resetValidation()
             this.text="";
         }
-      });
+         
+      
         /*    const para=this.text;
             this.$emit('search-weather', para);
             this.text="";
@@ -89,7 +112,9 @@ align-content: center;
     margin-left: 10px;
 }
 
-
+.input-cnt{
+    margin-right: 10px;
+}
 
 </style>
 
