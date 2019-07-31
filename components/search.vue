@@ -113,23 +113,6 @@ margin-top: 150px
     margin-top: 200px;
     margin-right:100px
 }
-/*
-.form-cnt{
-    display: flex;
-    flex-direction: row;
-    align-content: center;
-}
-
-
-
-/*.btn-cnt{
-    margin-left: 10px;
-}
-
-.input-cnt{
-    margin-right: 10px;
-}
-*/
 
 </style>
 

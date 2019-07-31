@@ -71,7 +71,18 @@ export default {
       humidity:""
     }
   },
-  
+  head(){
+    return{
+      title:"Weather App",
+      meta:[
+        {
+          hid:'Description',
+          name:'Description',
+          content:'Simple weather app with animation'
+        }
+      ]
+    }
+  }
 
 
 

@@ -1,6 +1,6 @@
 <template>
     <div  class="display-cnt">
-      <v-container  >
+      <v-container class="cnter" >
         <v-layout ml-5 column>
           <v-flex >
             <canvas id="icon2" width="250" height="250"></canvas>
@@ -62,17 +62,12 @@ background-color: #4caf50;
 align-items: center;
 flex-wrap: wrap;
 align-content: center;
-
 min-height: 100vh;
 }
-.inner-cnt{
-    margin-top: 50%;
-}
 
-.img-cnt{
-    /*background: crimson; */
-    height: 300px;
-    margin-top: 80px;
+.cnter{
+  margin-top: 50px;
+  margin-left: 300px;
 }
 
 </style>
