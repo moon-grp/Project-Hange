@@ -49,13 +49,13 @@ export default {
 
   async  getweather(text){
   try {
-   const res= await axios.get(`https://api.darksky.net/forecast/${process.env.API_KEY}/${text.latitude},${text.longitude}?units=auto`)
-    console.log(res.data.currently);
-    this.weather="Forcast: " + res.data.currently.summary;
-    this.temperature= "Temperature: " + res.data.currently.temperature;
-    this.humidity= "Humidity: " + res.data.currently.humidity;
-    this.icon=res.data.currently.icon.replace(/-/g, "_").toUpperCase();
-    this.addr="Location: " + text.addr;
+   const res= await axios.get(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${process.env.API_KEY}/${text.latitude},${text.longitude}?units=auto`)
+    console.log(res.data.currently)
+    this.weather="Forcast: " + res.data.currently.summary
+    this.temperature= "Temperature: " + res.data.currently.temperature
+    this.humidity= "Humidity: " + res.data.currently.humidity
+    this.icon=res.data.currently.icon.replace(/-/g, "_").toUpperCase()
+    this.addr="Location: " + text.addr
   } catch (error) {
     console.log(error)
   }
