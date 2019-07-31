@@ -1,6 +1,6 @@
 # Project Hange
 
-> Simple weather app built using Vue, Nuxt google places Api and co. 
+> Simple weather app built using Vue, Nuxt, google places Api and co. 
 
 ## Build Setup
 
