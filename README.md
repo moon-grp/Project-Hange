@@ -1,6 +1,6 @@
-# weather2
+# Project Hange
 
-> My world-class Nuxt.js project
+> Simple weather app built using Vue, Nuxt, google places Api and co. 
 
 ## Build Setup
 
