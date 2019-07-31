@@ -1,19 +1,25 @@
 <template>
-  <div class="parent">
-  
-     <a-row>
-      <a-col :span="12">
-<searchw v-on:search-weather="getweather" />
-      </a-col>
-      <a-col :span="12">
-          <Result
-    :weather="weather" 
-    :temp="temperature"
-    :icon="icon"
-    />
+  <div >  
+      <v-layout row >
+        <v-flex xs12 md6>
+          <searchw
+          v-on:search-weather="getweather" />
+        </v-flex>
+        <v-flex xs12 md6 >
+         <Result
+          :weather="weather"
+          :temp="temperature"
+          :humidity="humidity"
+          :icon="icon"
+          :addr="addr"
+          />
+        </v-flex>
+      </v-layout>
     
-      </a-col>
-    </a-row>
+
+
+
+  
     </div>
 </template>
 
@@ -42,36 +48,30 @@ export default {
   methods:{
 
   async  getweather(text){
-    console.log(text)
-        const key="891a7691bf444406842494eb9b71b78c";
   try {
-    const res = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${text}&APPID=${key}`);
-    console.log(res.data);
-    this.weather= res.data.weather[0].description;
-    this.temperature= res.data.main.temp;
-    this.icon=res.data.weather[0].id;
-    console.log(this.icon);
-    console.log(this.temperature);
-    
+   const res= await axios.get(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${process.env.API_KEY}/${text.latitude},${text.longitude}?units=auto`)
+    console.log(res.data.currently);
+    this.weather="Forcast: " + res.data.currently.summary;
+    this.temperature= "Temperature: " + res.data.currently.temperature;
+    this.humidity= "Humidity: " + res.data.currently.humidity;
+    this.icon=res.data.currently.icon.replace(/-/g, "_").toUpperCase();
+    this.addr="Location: " + text.addr;
   } catch (error) {
     console.log(error)
   }
-    }
+    },
   },
 
   data(){
     return{
       weather:" ",
-      location:[
-        {
-
-        }
-      ],
-      icon:200,
+      location:'',
+      icon:'',
       temperature: "",
-      query:""
+      humidity:""
     }
   },
+  
 
 
 

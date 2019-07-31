@@ -1,45 +1,47 @@
 <template>
-<v-app>
-<div class="search-cnt">
-    <div class="inner-cnt">
-        
-   <h1>Weather Forcast</h1>
-   <h3>Enter the city name you want us to forecast</h3>
-    <a-row type="flex" align="middle" justify="center">
-              <v-form
-               v-model="valid" 
-               ref="form"
-               @submit.prevent='onsubmit'>
- <a-col :span="12">
-          <v-text-field
-                class="input-cnt"
-                label="Enter City..."
-                single-line
-                outline
-                shape
-                v-model="text"
-                style="height: 50px"
-                required
-                :rules="nameRules"   
-          ></v-text-field>
- </a-col>
-  <a-col :span="12">
-        <v-btn 
-            depressed 
-            normal
-            :disabled="!valid" 
-            class="btn-cnt" 
-            style="height: 45px"  
-            color="primary"
-            @click="onsubmit"
-            >Submit</v-btn>
-  </a-col>
-              </v-form>
-        </a-row>
-    </div>
+<div>
+        <v-container pt-5 class="search-cnt">
+            <v-layout column >
+                <v-flex>
+                    <h1 class="headline">Weather Forcast</h1>
+                    <h3 class="subheading grey--text">Enter the city name you want us to forecast</h3>
+                </v-flex>
+                <v-layout row >
+                <v-flex xs6 md6>
+                    <v-form
+                        v-model="valid" 
+                        ref="form"
+                        @submit.prevent='onsubmit'>
+                    <v-text-field
+                        id="searchTextField"
+                        class="input-cnt"
+                        single-line
+                        outline
+                        shape
+                        size=50
+                        v-model="text"
+                        style="height: 50px"
+                        required
+                    ></v-text-field>
+                    </v-form>
+                </v-flex>
+                     <v-flex xs4 md6>
+                    <v-btn 
+                        class="white--text"
+                        normal
+                        :disabled="!valid" 
+                        style="height: 45px"  
+                        color="#4caf50"
+                        @click="onsubmit"
+                    >Submit</v-btn>
+                    </v-flex>
+                 
+                </v-layout>
     
+            </v-layout>
+        </v-container>
 </div>
-    </v-app>
+    
 </template>
 
 <script>
@@ -61,24 +63,41 @@ export default {
             nameRules: [
         v => !!v || 'Name is required',
       ],
+      loc_data:[{
+          longitude:'',
+          latitude:'',
+          addr:''
+      }
+      ]
         }
     },
     methods:{
         onsubmit(){
       if (this.$refs.form.validate()) {
-           const para=this.text;
-            this.$emit('search-weather', para);
+            this.$emit('search-weather', this.loc_data);
             this.$refs.form.resetValidation()
             this.text="";
         }
-         
-      
-        /*    const para=this.text;
-            this.$emit('search-weather', para);
-            this.text="";
-            */
-        }
-    }
+        },
+    },
+    //autocomplete function
+    mounted: function () {
+  var input = document.getElementById('searchTextField');
+   var options = {
+  	types: ['geocode'],
+  };
+  const place = new google.maps.places.Autocomplete(
+    input, options
+  );
+  place.addListener('place_changed', ()=>{
+      const loc=place.getPlace()
+      this.loc_data.addr=loc.formatted_address;
+      this.loc_data.latitude=loc.geometry.location.lat();
+      this.loc_data.longitude= loc.geometry.location.lng();
+  });
+  
+},
+
 }
 </script>
 
@@ -87,10 +106,8 @@ export default {
 
 .search-cnt{
 display: flex;
-flex-direction: column;
-align-items: center;
-flex-wrap: wrap;
 align-content: center;
+margin-top: 150px
 }
 .inner-cnt{
     margin-top: 200px;
@@ -117,4 +134,4 @@ align-content: center;
 </style>
 
 
-</style>
+

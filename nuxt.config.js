@@ -1,5 +1,8 @@
+const env = require('dotenv').config()
+
 
 export default {
+  env:env.parsed,
   mode: 'spa',
   /*
   ** Headers of the page
@@ -14,6 +17,15 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {rel: 'stylesheet', href:'/weather-icons.css'}
+    ],
+    script: [
+      {
+       src: "https://maps.googleapis.com/maps/api/js?key=AIzaSyDzy7jbwQVnTxecvgqtFS4ZD8LtSPR36Lk&libraries=places"
+      },
+      {
+        src: "https://gitcdn.link/cdn/darkskyapp/skycons/master/skycons.js",
+        
+      }
     ]
   },
   /*
@@ -54,5 +66,6 @@ export default {
     */
     extend(config, ctx) {
     }
-  }
+  },
+ 
 }
