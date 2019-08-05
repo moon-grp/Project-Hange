@@ -20,7 +20,7 @@ export default {
     ],
     script: [
       {
-       src: "https://maps.googleapis.com/maps/api/js?key=AIzaSyDzy7jbwQVnTxecvgqtFS4ZD8LtSPR36Lk&libraries=places"
+       src: `https://maps.googleapis.com/maps/api/js?key=${process.env.API_KEY2}&libraries=places`
       },
       {
         src: "https://gitcdn.link/cdn/darkskyapp/skycons/master/skycons.js",

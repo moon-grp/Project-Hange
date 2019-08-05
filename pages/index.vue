@@ -49,7 +49,7 @@ export default {
 
   async  getweather(text){
   try {
-   const res= await axios.get(`https://api.darksky.net/forecast/${process.env.API_KEY}/${text.latitude},${text.longitude}?units=auto`)
+   const res= await axios.get(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${process.env.API_KEY}/${text.latitude},${text.longitude}?units=auto`)
     console.log(res.data.currently)
     this.weather="Forcast: " + res.data.currently.summary
     this.temperature= "Temperature: " + res.data.currently.temperature
